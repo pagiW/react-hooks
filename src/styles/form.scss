@@ -1,0 +1,22 @@
+.form {
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 50px;
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 45%;
+        input {
+            border: 3px solid black;
+            border-radius: 100px;
+            margin: 10px 0;
+            padding: 5px 15px;
+        }
+        .buttons {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}
