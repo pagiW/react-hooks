@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {PayPalButton} from 'react-paypal-button';
 import {addOrder} from '../actions';
+import {Helmet} from 'react-helmet';
 
 const Pay = ({cart, buyer, addOrder, history}) => {
     const paypalOptions = {
@@ -30,33 +31,38 @@ const Pay = ({cart, buyer, addOrder, history}) => {
         }
     }
     return (
-        <div className="Payment">
-            <div className="Payment-content">
-                <h3>Resumen del pedido:</h3>
-                <ul>
-                    {
-                        cart.map((item, index) => (
-                            <li key={index}>
-                                <h3>{item.title}</h3>
-                                <div>${item.price}</div>
-                            </li>
-                        ))
-                    }
-                </ul>
-                <div className="Payment-button">
-                    <PayPalButton
-                        paypalOptions={paypalOptions}
-                        buttonStyles={design}
-                        amount={sumar()}
-                        onPaymentStart={() => console.log('start')}
-                        onPaymentSuccess={(data) => success(data)}
-                        onPaymentError={(error) => console.error('failed')}
-                        onPaymentCancel={data => console.log('canceled')}
-                    />
+        <>
+            <Helmet>
+                <title>Pay</title>
+            </Helmet>
+            <div className="Payment">
+                <div className="Payment-content">
+                    <h3>Resumen del pedido:</h3>
+                    <ul>
+                        {
+                            cart.map((item, index) => (
+                                <li key={index}>
+                                    <h3>{item.title}</h3>
+                                    <div>${item.price}</div>
+                                </li>
+                            ))
+                        }
+                    </ul>
+                    <div className="Payment-button">
+                        <PayPalButton
+                            paypalOptions={paypalOptions}
+                            buttonStyles={design}
+                            amount={sumar()}
+                            onPaymentStart={() => console.log('start')}
+                            onPaymentSuccess={(data) => success(data)}
+                            onPaymentError={(error) => console.error('failed')}
+                            onPaymentCancel={data => console.log('canceled')}
+                        />
+                    </div>
                 </div>
+                <div></div>
             </div>
-            <div></div>
-        </div>
+        </>
     );
 }
 

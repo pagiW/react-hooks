@@ -1,8 +1,9 @@
 import React, { useRef } from 'react';
-import '@styles/form.scss';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addBuyer } from '../actions';
+import { Helmet } from 'react-helmet';
+import '@styles/form.scss';
 
 const Info = ({cart, addBuyer, history}) => {
     const form = useRef(null);
@@ -25,34 +26,41 @@ const Info = ({cart, addBuyer, history}) => {
             history.push('/practica-hooks/checkout/pay');
         }
     }
-    return ( <main>
-        <h2>Llena este formulario:</h2>
-        <div className='form'>
-            <form ref={form}>
-                <input type="text" placeholder="Nombre completo" name="name" />
-                <input type="text" placeholder="Correo Electronico" name="email" />
-                <input type="text" placeholder="Direccion" name="address" />
-                <input type="text" placeholder="apto" name="apto" />
-                <input type="text" placeholder="Ciudad" name="city" />
-                <input type="text" placeholder="Pais" name="country" />
-                <input type="text" placeholder="Estado" name="state" />
-                <input type="text" placeholder="Codigo postal" name="cp" />
-                <input type="text" placeholder="Telefono" name="phone" />
-                <div className='buttons'>
-                    <Link to='/practica-hooks/checkout' className='goback'>regresar</Link>
-                    <button type='button' onClick={handleSubmit} className='pay'>pagar</button>
-                </div>
-            </form>
-            <ul className='product'>
-                {cart.map((item, index) => (
-                    <li key={index}>
-                        <h3>producto: {item.title}</h3>
-                        <h4>precio: ${item.price}</h4>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    </main> );
+    return (
+    <>
+        <Helmet>
+            <title>form</title>
+        </Helmet>
+        <main>
+            <h2>Llena este formulario:</h2>
+            <div className='form'>
+                <form ref={form}>
+                    <input type="text" placeholder="Nombre completo" name="name" />
+                    <input type="text" placeholder="Correo Electronico" name="email" />
+                    <input type="text" placeholder="Direccion" name="address" />
+                    <input type="text" placeholder="apto" name="apto" />
+                    <input type="text" placeholder="Ciudad" name="city" />
+                    <input type="text" placeholder="Pais" name="country" />
+                    <input type="text" placeholder="Estado" name="state" />
+                    <input type="text" placeholder="Codigo postal" name="cp" />
+                    <input type="text" placeholder="Telefono" name="phone" />
+                    <div className='buttons'>
+                        <Link to='/practica-hooks/checkout' className='goback'>regresar</Link>
+                        <button type='button' onClick={handleSubmit} className='pay'>pagar</button>
+                    </div>
+                </form>
+                <ul className='product'>
+                    {cart.map((item, index) => (
+                        <li key={index}>
+                            <h3>producto: {item.title}</h3>
+                            <h4>precio: ${item.price}</h4>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </main>
+    </>
+    );
 }
 
 const mapStateToProps = state => ({
